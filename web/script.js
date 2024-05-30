@@ -8,6 +8,13 @@ function showMessage(message, isError = false) {
     messageElement.style.color = isError ? 'red' : 'green';
 }
 
+
+
+if (!SimpleWebAuthnBrowser.browserSupportsWebAuthn()) {
+    showMessage('It seems this browser does not support WebAuthn...', true);
+}
+
+
 async function register() {
     // Retrieve the username from the input field
     const username = document.getElementById('username').value;
@@ -15,8 +22,8 @@ async function register() {
     try {
         // Get registration options from your server. Here, we also receive the challenge.
         const response = await fetch('/api/passkey/registerStart', {
-            method: 'POST', headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username: username})
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: username })
         });
         console.log(response)
 
@@ -52,7 +59,7 @@ async function register() {
             showMessage(msg, true);
         }
     } catch
-        (error) {
+    (error) {
         showMessage('Error: ' + error.message, true);
     }
 }
@@ -64,8 +71,8 @@ async function login() {
     try {
         // Get login options from your server. Here, we also receive the challenge.
         const response = await fetch('/api/passkey/loginStart', {
-            method: 'POST', headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username: username})
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: username })
         });
         // Check if the login options are ok.
         if (!response.ok) {

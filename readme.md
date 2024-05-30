@@ -1,5 +1,6 @@
 # Flow-Auth
-Microservice to handle all the auth system:
+Microservice to handle Passkey auth system:
+Works only on chrome bc idk what firefox is doing...
 
 - provide a simple RESTAPI to authenticate and authorize users
 - Fack Javascript. Long life to golang!
